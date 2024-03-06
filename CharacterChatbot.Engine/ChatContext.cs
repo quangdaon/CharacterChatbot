@@ -13,16 +13,16 @@ public class ChatContext
   private readonly OpenAIAPI _api;
   private readonly List<ChatMessage> _messages;
 
+  public readonly string Prompt;
+
   public ChatContext(string secretKey, string user, ChatbotProfile profile)
   {
+    Prompt = $"{profile.Prompt} {string.Format(CONSTANT_PROMPT, user)}";
     _api = new OpenAIAPI(secretKey);
-    var prompt = $"{profile.Prompt} {string.Format(CONSTANT_PROMPT, user)}";
-    Console.WriteLine("ChatGPT Prompt: {0}", prompt);
-    Console.WriteLine();
 
     _messages = new List<ChatMessage>
     {
-      new(ChatMessageRole.System, prompt)
+      new(ChatMessageRole.System, Prompt)
     };
   }
 

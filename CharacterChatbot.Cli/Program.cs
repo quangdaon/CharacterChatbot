@@ -15,6 +15,9 @@ var chatbotProfile = GetProfile();
 var secretKey = config.GetValue<string>("OpenAi:SecretKey");
 var context = new ChatContext(secretKey, "Quangdao Nguyen", chatbotProfile);
 
+Console.WriteLine("ChatGPT Prompt: {0}", context.Prompt);
+Console.WriteLine();
+
 Console.WriteLine("You are speaking to {0}.", chatbotProfile.DisplayName);
 Console.WriteLine();
 
