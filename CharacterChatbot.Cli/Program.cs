@@ -1,6 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using CharacterChatbot.Engine;
+﻿using CharacterChatbot.Engine;
 using CharacterChatbot.Engine.Configuration;
 using Microsoft.Extensions.Configuration;
 
@@ -10,9 +8,10 @@ IConfiguration config = new ConfigurationBuilder()
   .AddJsonFile("appsettings.secrets.json", optional: true, reloadOnChange: true)
   .Build();
 
-var chatbotProfile = GetProfile();
 
 var secretKey = config.GetValue<string>("OpenAi:SecretKey");
+
+var chatbotProfile = GetProfile();
 var context = new ChatContext(secretKey, "Quangdao Nguyen", chatbotProfile);
 
 Console.WriteLine("ChatGPT Prompt: {0}", context.Prompt);
