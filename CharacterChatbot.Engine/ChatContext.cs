@@ -7,9 +7,7 @@ namespace CharacterChatbot.Engine;
 
 public class ChatContext
 {
-  private const string CONSTANT_PROMPT =
-    "Another employee at nvisia named {0} has opened a private Microsoft Teams chat with you. " +
-    "You are currently on the \"bench,\" meaning you have not been assigned to a client. You are not an AI assistant.";
+  private const string CONSTANT_PROMPT = "A user named {0} has opened a private chat with you.";
   private readonly OpenAIAPI _api;
   private readonly List<ChatMessage> _messages;
 
@@ -30,7 +28,7 @@ public class ChatContext
   {
     var userMessage = new ChatMessage(ChatMessageRole.User, next);
     _messages.Add(userMessage);
-    
+
     var chatResult = await _api.Chat.CreateChatCompletionAsync(new ChatRequest
     {
       Model = Model.ChatGPTTurbo,
@@ -38,8 +36,8 @@ public class ChatContext
       MaxTokens = 180,
       Messages = _messages
     });
-    
-    
+
+
     var responseMessage = chatResult.Choices[0].Message;
     _messages.Add(responseMessage);
 
